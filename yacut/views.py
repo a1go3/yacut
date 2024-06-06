@@ -11,12 +11,13 @@ from .forms import URLForm
 
 @app.route('/', methods=['GET', 'POST'])
 def get_short_url():
-    form = URLForm()
-    if form.validate_on_submit():
-        url = URLMap(
-            original=form.original.data,
-            short=form.short.data,
-        )
-        db.session.add(url)
-        db.session.commit()
-    return redirect('index.html')
+    # form = URLForm()
+    # if form.validate_on_submit():
+    #     url = URLMap(
+    #         original=form.original.data,
+    #         short=form.short.data,
+    #     )
+    #     db.session.add(url)
+    #     db.session.commit()
+    # return redirect('index.html')
+    return render_template('urlcut.html')

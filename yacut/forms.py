@@ -4,13 +4,12 @@ from wtforms.validators import DataRequired, Length, Optional
 
 
 class URLForm(FlaskForm):
-    original = StringField(
+    original_link = StringField(
         'Введите ссылку',
         validators=[DataRequired(message='Обязательное поле'),
                     Length(1, 128)]
     )
-    short = TextAreaField(
+    custom_id = TextAreaField(
         'Введите короткую ссылку',
         validators=[DataRequired(message='Обязательное поле')]
     )
-    submit = SubmitField('Добавить')
