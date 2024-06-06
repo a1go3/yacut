@@ -6,7 +6,8 @@ from settings import Config
 app = Flask(
     __name__,
     static_url_path='',
-    static_folder='../html'
+    static_folder='../html',
+    template_folder='../html'
 )
 app.config.from_object(Config)
 db = SQLAlchemy(app)
