@@ -19,7 +19,7 @@ def get_short_url():
         )
         db.session.add(url)
         db.session.commit()
-    return render_template('urlcut.html')
+    return render_template('url_cut.html')
 
 
 

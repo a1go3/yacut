@@ -7,7 +7,7 @@ app = Flask(
     __name__,
     static_url_path='',
     static_folder='../html',
-    template_folder='../html'
+    template_folder='../html/templates'
 )
 app.config.from_object(Config)
 db = SQLAlchemy(app)
