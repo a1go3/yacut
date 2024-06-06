@@ -25,5 +25,5 @@ def get_short_url():
 
 @app.route('/<string:short>')
 def get_original_url(short):
-    url = URLMap.query.filter_by(short=short).all()
+    url = URLMap.query.filter_by(short=short).first()
     return render_template('original_url.html', url=url)
