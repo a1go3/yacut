@@ -8,19 +8,18 @@ from .models import URLMap
 from .forms import URLForm
 
 
-
 @app.route('/', methods=['GET', 'POST'])
 def get_short_url():
     form = URLForm()
     if form.validate_on_submit():
         url = URLMap(
-            original=form.original.data,
-            short=form.short.data,
+            original=form.original_link.data,
+            short=form.custom_id.data,
         )
         db.session.add(url)
         db.session.commit()
-    return render_template('url_cut.html')
-
+        return redirect(url_for('get_short_url'))
+    return render_template('url_cut.html', form=form)
 
 
 @app.route('/<string:short>')
