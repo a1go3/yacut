@@ -18,11 +18,11 @@ def get_short_url():
         )
         db.session.add(url)
         db.session.commit()
-        return redirect(url_for('get_short_url'))
+        return render_template('url_cut.html', form=form, url=url)
     return render_template('url_cut.html', form=form)
 
 
 @app.route('/<string:short>')
 def get_original_url(short):
-    url = URLMap.query.filter_by(short=short).first()
-    return render_template('original_url.html', url=url)
+    url = URLMap.query.filter_by(short=short).first_or_404()
+    return redirect(url.original)

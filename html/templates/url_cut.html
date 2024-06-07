@@ -21,22 +21,22 @@
                                 </p>
                             {% endif %}
 
-                                {{ form.custom_id(class="form-control form-control-lg py-3 mb-3", placeholder="Ваш вариант короткой ссылки") }}
-                                {% if form.custom_id.errors %}
-                                    <p class="text-danger">
-                                        {% for error in form.custom_id.errors %}
-                                            {{ error }}
-                                        {% endfor %}
-                                    </p>
-                                {% endif %}
-                                {{ form.submit(class="btn btn-primary") }}
+                            {{ form.custom_id(class="form-control form-control-lg py-3 mb-3", placeholder="Ваш вариант короткой ссылки") }}
+                            {% if form.custom_id.errors %}
+                                <p class="text-danger">
+                                    {% for error in form.custom_id.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                            {{ form.submit(class="btn btn-primary") }}
                         </form>
                     </div>
                 </div>
             </div>
-                    <div class="col-sm">
-                    </div>
-                </div>
+            <div class="col-sm">
+            </div>
+            </div>
             </div>
             <div class="container">
                 <div class="row ">
@@ -44,8 +44,13 @@
                     </div>
                     <div class="col-sm">
                         <p class="text-center">
-                        <h5 class="text-center">Пример информационного
-                            сообщения</h5>
+                        <h5 class="text-center">
+                            {% if url %}
+                                Ваша короткая сслыка готова:
+                                <a href="{{ url_for('get_original_url', short=url.short, _external=True) }}">{{ url_for('get_original_url', short=url.short, _external=True) }}</a>
+                                </p>
+                                </h5>
+                            {% else %}  {% endif %}
                         </p>
                     </div>
                     <div class="col-sm">
