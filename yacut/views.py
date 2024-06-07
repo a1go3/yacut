@@ -17,21 +17,17 @@ def index():
             original=form.original_link.data,
             short=get_short_url()
         )
-        db.session.add(url)
-        db.session.commit()
-        return render_template('index.html', form=form, url=url)
-    if form.validate_on_submit():
-        short = form.custom_id.data
-        if URLMap.query.filter_by(short=short).first() is not None:
-            flash('Предложенный вариант короткой ссылки уже существует')
+        return add_data(form, url)
+    elif form.validate_on_submit():
+        if URLMap.query.filter_by(
+                short=form.custom_id.data).first() is not None:
+            flash('Предложенный вами вариант короткой ссылки уже существует.')
             return render_template('index.html', form=form)
         url = URLMap(
             original=form.original_link.data,
-            short=short,
+            short=form.custom_id.data,
         )
-        db.session.add(url)
-        db.session.commit()
-        return render_template('index.html', form=form, url=url)
+        return add_data(form, url)
     return render_template('index.html', form=form)
 
 
@@ -43,3 +39,9 @@ def get_original_url(short):
 
 def get_short_url():
     return ''.join(choices(string.digits + string.ascii_letters, k=6))
+
+
+def add_data(form, url):
+    db.session.add(url)
+    db.session.commit()
+    return render_template('index.html', form=form, url=url)
