@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import datetime
 
 from settings import MAX_LENGTH_SHORT_URL, URL
 
@@ -13,7 +13,7 @@ class URLMap(db.Model):
     original = db.Column(db.String(length=None), nullable=False)
     short = db.Column(db.String(MAX_LENGTH_SHORT_URL), nullable=False,
                       unique=True)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.now(UTC))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def to_dict(self):
         return dict(
