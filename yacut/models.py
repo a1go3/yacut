@@ -1,8 +1,7 @@
 from datetime import datetime, UTC
 
 from . import db
-
-URL = 'http://localhost/'
+from settings import URL
 
 
 class URLMap(db.Model):

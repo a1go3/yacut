@@ -30,7 +30,7 @@ class InvalidAPIUsage(Exception):
 
     # Метод для сериализации переданного сообщения об ошибке:
     def to_dict(self):
-        return dict(message = self.message)
+        return dict(message=self.message)
 
 
 # Обработчик кастомного исключения для API.
