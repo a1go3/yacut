@@ -1,7 +1,6 @@
 import string
 from random import choices
 
-
 from flask import flash, redirect, render_template
 
 from . import app, db
@@ -44,4 +43,8 @@ def get_original_url(short):
 
 
 def get_unique_short_id():
-    return ''.join(choices(string.digits + string.ascii_letters, k=6))
+    while True:
+        short_link = ''.join(
+            choices(string.digits + string.ascii_letters, k=6))
+        if not URLMap.query.filter_by(short=short_link).first():
+            return short_link
