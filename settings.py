@@ -1,6 +1,7 @@
 import os
 
 URL = 'http://localhost/'
+REGEX = r'[A-Za-z0-9_]+$'
 
 
 class Config(object):

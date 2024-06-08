@@ -1,21 +1,20 @@
-import string
-from random import choices
-
 from flask import flash, redirect, render_template
 
 from . import app, db
 
 from .models import URLMap
+from .messages import SHORT_URL_EXIST
 from .forms import URLForm
+from .utils import get_unique_short_id
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """Функция отображающая главную страницу сервиса."""
     form = URLForm()
     if form.validate_on_submit():
         if URLMap.query.filter_by(short=form.custom_id.data).first():
-            flash(
-                'Предложенный вариант короткой ссылки уже существует.')
+            flash(SHORT_URL_EXIST)
             return render_template('index.html', form=form)
 
         if not form.custom_id.data:
@@ -38,13 +37,7 @@ def index():
 
 @app.route('/<string:short>', methods=['GET'])
 def get_original_url(short):
+    """Функция перенаправляющая со ссылки сгенерированной сервисом на
+    оригинальную, пользовательскую ссылку."""
     url = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(url.original)
-
-
-def get_unique_short_id():
-    while True:
-        short_link = ''.join(
-            choices(string.digits + string.ascii_letters, k=6))
-        if not URLMap.query.filter_by(short=short_link).first():
-            return short_link

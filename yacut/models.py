@@ -5,6 +5,8 @@ from settings import URL
 
 
 class URLMap(db.Model):
+    """Модель приложения. Хранит в себе связь оригинальных и укороченных
+    ссылок, а также дату их создания."""
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.String(length=None), nullable=False)
     short = db.Column(db.String(16), nullable=False, unique=True)

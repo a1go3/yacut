@@ -10,6 +10,8 @@ from .views import get_unique_short_id
 
 @app.route('/api/id/<short>/', methods=['GET'])
 def get_full_url(short):
+    """Обработка GET-запроса на получение оригинальной ссылки по указанному
+    короткому идентификатору."""
     url = URLMap.query.filter_by(short=short).first()
     if url is None:
         raise InvalidAPIUsage('Указанный id не найден', HTTPStatus.NOT_FOUND)
@@ -18,6 +20,7 @@ def get_full_url(short):
 
 @app.route('/api/id/', methods=['POST'])
 def get_short_url():
+    """Обработка POST-запроса на создание новой короткой ссылки."""
     try:
         request.get_json()
     except Exception:
@@ -47,4 +50,4 @@ def get_short_url():
     url.from_dict(data)
     db.session.add(url)
     db.session.commit()
-    return jsonify(url.to_dict()), 201
+    return jsonify(url.to_dict()), HTTPStatus.CREATED
