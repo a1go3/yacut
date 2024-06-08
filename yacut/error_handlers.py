@@ -6,7 +6,7 @@ from . import app, db
 
 
 class InvalidAPIUsage(Exception):
-    """Общий класс ошибок API."""
+    """ Общий класс ошибок API."""
     status_code = HTTPStatus.BAD_REQUEST
 
     def __init__(self, message, status_code=None):
@@ -21,7 +21,7 @@ class InvalidAPIUsage(Exception):
 
 @app.errorhandler(InvalidAPIUsage)
 def invalid_api_usage(error):
-    """Обработчик кастомного исключения для API."""
+    """Обработчик исключений для API."""
     return jsonify(error.to_dict()), error.status_code
 
 

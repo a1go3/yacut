@@ -1,15 +1,18 @@
-from datetime import datetime, UTC
+from datetime import UTC, datetime
+
+from settings import MAX_LENGTH_SHORT_URL, URL
 
 from . import db
-from settings import URL
 
 
 class URLMap(db.Model):
     """Модель приложения. Хранит в себе связь оригинальных и укороченных
-    ссылок, а также дату их создания."""
+    ссылок, а также дату их создания.
+    """
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.String(length=None), nullable=False)
-    short = db.Column(db.String(16), nullable=False, unique=True)
+    short = db.Column(db.String(MAX_LENGTH_SHORT_URL), nullable=False,
+                      unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.now(UTC))
 
     def to_dict(self):

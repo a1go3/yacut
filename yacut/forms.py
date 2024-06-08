@@ -1,11 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, URLField
-from wtforms.validators import DataRequired, Length, Optional, URL, Regexp
-
-from .messages import LONG_URL, REQUIRED_FIELD, CORRECT_URL, SHORT_URL, \
-    TOO_LONG_SHORT_URL, ENG_LET_NUM, CREATE
-
 from settings import REGEX
+from wtforms import SubmitField, URLField
+from wtforms.validators import URL, DataRequired, Length, Optional, Regexp
+
+from .messages import (CORRECT_URL, CREATE, ENG_LET_NUM, LONG_URL,
+                       REQUIRED_FIELD, SHORT_URL, TOO_LONG_SHORT_URL)
 
 
 class URLForm(FlaskForm):

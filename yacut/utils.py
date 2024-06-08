@@ -5,7 +5,7 @@ from .models import URLMap
 
 
 def get_unique_short_id():
-    """Функция для генерации короткой ссылки. """
+    """Функция для генерации короткой ссылки."""
     while True:
         short_link = ''.join(
             choices(string.digits + string.ascii_letters, k=6))

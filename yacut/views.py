@@ -1,10 +1,9 @@
 from flask import flash, redirect, render_template
 
 from . import app, db
-
-from .models import URLMap
-from .messages import SHORT_URL_EXIST
 from .forms import URLForm
+from .messages import SHORT_URL_EXIST
+from .models import URLMap
 from .utils import get_unique_short_id
 
 
@@ -38,6 +37,7 @@ def index():
 @app.route('/<string:short>', methods=['GET'])
 def get_original_url(short):
     """Функция перенаправляющая со ссылки сгенерированной сервисом на
-    оригинальную, пользовательскую ссылку."""
+    оригинальную, пользовательскую ссылку.
+    """
     url = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(url.original)
