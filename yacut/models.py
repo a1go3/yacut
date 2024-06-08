@@ -2,6 +2,8 @@ from datetime import datetime, UTC
 
 from . import db
 
+URL = 'http://localhost/'
+
 
 class URLMap(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,16 +14,9 @@ class URLMap(db.Model):
     def to_dict(self):
         return dict(
             url=self.original,
+            short_link=URL + self.short,
         )
 
-
-    # Добавляем в модель метод-десериализатор.
-    # На вход метод принимает словарь data, полученный из JSON в запросе.
     def from_dict(self, data):
-        # Для каждого поля модели, которое можно заполнить...
-        for field in ['original', 'short']:
-            # ...выполняется проверка — есть ли ключ с таким же именем в словаре:
-            if field in data:
-                # Если есть, добавляем значение из словаря
-                # в соответствующее поле объекта модели:
-                setattr(self, field, data[field])
+        setattr(self, 'original', data['url'])
+        setattr(self, 'short', data['custom_id'])
