@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
-from wtforms.validators import DataRequired, Length, Optional, URL, Regexp
+from wtforms.validators import DataRequired, Length, Optional, URL, Regexp, NumberRange
 
 
 class URLForm(FlaskForm):
@@ -13,7 +13,7 @@ class URLForm(FlaskForm):
     custom_id = StringField(
         'Ваш вариант короткой ссылки',
         validators=[Optional(),
-                    Length(min=6,
+                    Length(min=6, max=16,
                            message='Предложенный вариант ссылки слишком '
                                    'короткий. '
                                    'Введите минимум 6 символов.'),
