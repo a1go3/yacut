@@ -11,11 +11,9 @@ class URLMap(db.Model):
 
     def to_dict(self):
         return dict(
-            id=self.id,
-            original=self.original,
-            short=self.short,
-            timestamp=self.timestamp,
+            url=self.original,
         )
+
 
     # Добавляем в модель метод-десериализатор.
     # На вход метод принимает словарь data, полученный из JSON в запросе.

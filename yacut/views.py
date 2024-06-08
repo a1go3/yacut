@@ -15,7 +15,7 @@ def index():
     if form.validate_on_submit():
         if URLMap.query.filter_by(short=form.custom_id.data).first():
             flash(
-                'Предложенный вами вариант короткой ссылки уже существует.')
+                'Предложенный вариант короткой ссылки уже существует.')
             return render_template('index.html', form=form)
 
         if not form.custom_id.data:
