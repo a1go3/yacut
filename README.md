@@ -13,11 +13,6 @@ YaCut - это web-приложение и REST API для создания ко
 - /api/id/<short_id>/ — GET-запрос на получение оригинальной ссылки по указанному короткому идентификатору.
 
 ## Используемые технологии
-[![Python][Python-badge]][Python-url]
-[![Flask][Flask-badge]][Flask-url]
-[![SQLAlchemy][SQLAlchemy-badge]][SQLAlchemy-url]
-[![SQLite][SQLite-badge]][SQLite-url]
-
 - Python 3.11
 - Flask 3.0.2
 - Jinja2 3.1.4
