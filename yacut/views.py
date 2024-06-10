@@ -11,27 +11,29 @@ from .utils import get_unique_short_id
 def index():
     """Функция отображающая главную страницу сервиса."""
     form = URLForm()
-    if form.validate_on_submit():
-        if URLMap.query.filter_by(short=form.custom_id.data).first():
-            flash(SHORT_URL_EXIST)
-            return render_template('index.html', form=form)
+    if not form.validate_on_submit():
+        return render_template('index.html', form=form)
 
-        if not form.custom_id.data:
-            url = URLMap(
-                original=form.original_link.data,
-                short=get_unique_short_id()
-            )
+    if URLMap.query.filter_by(short=form.custom_id.data).first():
+        flash(SHORT_URL_EXIST)
+        return render_template('index.html', form=form)
 
-        else:
-            url = URLMap(
-                original=form.original_link.data,
-                short=form.custom_id.data,
-            )
+    if not form.custom_id.data:
+        url = URLMap(
+            original=form.original_link.data,
+            short=get_unique_short_id()
+        )
 
-        db.session.add(url)
-        db.session.commit()
-        return render_template('index.html', form=form, url=url)
-    return render_template('index.html', form=form)
+    else:
+        url = URLMap(
+            original=form.original_link.data,
+            short=form.custom_id.data,
+        )
+
+    db.session.add(url)
+    db.session.commit()
+    return render_template('index.html', form=form, url=url)
+
 
 
 @app.route('/<string:short>', methods=['GET'])
