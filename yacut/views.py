@@ -35,7 +35,6 @@ def index():
     return render_template('index.html', form=form, url=url)
 
 
-
 @app.route('/<string:short>', methods=['GET'])
 def get_original_url(short):
     """Функция перенаправляющая со ссылки сгенерированной сервисом на
